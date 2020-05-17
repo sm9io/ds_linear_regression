@@ -43,3 +43,4 @@ galton_heights %>%
   ggplot(aes(scale(father), scale(son))) +
   geom_point(alpha = 0.5) +
   geom_abline(intercept = 0, slope = r2)
+
