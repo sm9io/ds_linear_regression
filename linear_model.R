@@ -2,6 +2,7 @@ options(digits = 3)
 library(dslabs)
 library(tidyverse)
 library(Lahman)
+library(gridExtra)
 Teams %>%
   filter(yearID %in% 1961:2001) %>%
   mutate(singles = (H - HR - X2B - X3B) / G, BB = BB/G, HR = HR/G) %>%
@@ -56,7 +57,6 @@ lse <- replicate(B, {
     lm(son~ father, data = .) %>% .$coef
 })
 lse <- data.frame(beta_0 = lse[1,], beta_1 = lse[2,])
-library("gridExtra")
 p1 <- lse %>% ggplot(aes(beta_0)) + geom_histogram(binwidth = 5, color = "black")
 p2 <- lse %>% ggplot(aes(beta_1)) + geom_histogram(binwidth = .1, color = "black")
 grid.arrange(p1, p2, ncol = 2)
